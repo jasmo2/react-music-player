@@ -3,9 +3,7 @@
 import React, { Component, PropTypes } from "react";
 import {AppRegistry, StyleSheet, View, Text, ListView, Image, TouchableHighlight, Platform} from "react-native";
 import { Player } from 'react-native-audio-streaming';
-import PlayCircleOutline from 'react-native-vector-icons/Material';
-
-//play-circle-outline
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 
 const styles = StyleSheet.create({
@@ -15,17 +13,14 @@ const styles = StyleSheet.create({
   },
   container:{
 		flex: 1,
-	//	flexDirection: "column",
-		// justifyContent: "center",
-		// alignItems: "stretch",
 		backgroundColor: "#AAAAAA"
 	},
   playerContainer:{
     alignItems: "center",
-    backgroundColor: "blue",
+    backgroundColor: "#555555",
     flex: 1,
-		flexDirection: "column",
-    justifyContent: "center",
+		flexDirection: "row",
+    justifyContent: "space-around",
   },
 	imageContainer:{
 		height: 100,
@@ -55,6 +50,7 @@ class Reproductor extends Component{
     this.state={
       actualAudio: audiosPlaylist[0],
       audios: audiosPlaylist,
+      reproductorState: "play-circle-outline",
     }
   }
 
@@ -64,7 +60,9 @@ class Reproductor extends Component{
 
       </View>
       <View style={styles.playerContainer}>
-        <PlayCircleOutline/>
+        <MaterialIcons size={40} name="skip-previous" color="white"/>
+        <MaterialIcons size={40} name={this.state.reproductorState} color="white"/>
+        <MaterialIcons size={40} name="skip-next" color="white"/>
       </View>
     </View>
   )}
