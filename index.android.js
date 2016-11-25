@@ -2,14 +2,16 @@
 
 import React, { Component, PropTypes } from "react";
 import {AppRegistry, StyleSheet, View, Text, ListView, Image, TouchableHighlight, Platform} from "react-native";
-import { Player } from 'react-native-audio-streaming';
+import { ReactNativeAudioStreaming, Player } from 'react-native-audio-streaming';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 
 const styles = StyleSheet.create({
   backgroundVideo: {
+    alignItems: "center",
     backgroundColor: "red",
     flex: 2,
+    justifyContent: "center",
   },
   container:{
 		flex: 1,
@@ -41,8 +43,12 @@ const styles = StyleSheet.create({
 	}
 });
 const audioRoot = ""
-const audiosPlaylist = [`${audioRoot}goodbey mylover`,`${audioRoot}hello`,
-`${audioRoot}quedate`,`${audioRoot}si pudiera`];
+const audiosPlaylist = [
+  {name: "Mañanitas",song:"https://firebasestorage.googleapis.com/v0/b/audio-8bd52.appspot.com/o/Las%20man%CC%83anitas%20Minions.mp3?alt=media&token=0f1b083c-9d73-4cd8-b508-1eae9f3bb19c"},
+  {name: "Goodbye mylover",song:"https://firebasestorage.googleapis.com/v0/b/audio-8bd52.appspot.com/o/goodbey%20mylover.mp3?alt=media&token=fa37cba9-2989-4fb7-88d3-b393dbb72387"},
+  {name: "La vamos a Tumbar",song:"https://firebasestorage.googleapis.com/v0/b/audio-8bd52.appspot.com/o/la%20vamos%20a%20tumbar.mp3?alt=media&token=5d1ec1da-78cc-4640-b644-bc6e809f2114"},
+  {name: "Hello",song:"https://firebasestorage.googleapis.com/v0/b/audio-8bd52.appspot.com/o/hello.mp3?alt=media&token=19a12a17-fef8-4bd7-a479-f3edf4630cf8"},
+];
 
 class Reproductor extends Component{
   constructor(props){
@@ -50,19 +56,60 @@ class Reproductor extends Component{
     this.state={
       actualAudio: audiosPlaylist[0],
       audios: audiosPlaylist,
-      reproductorState: "play-circle-outline",
+      reproductorState: {img: "play-circle-outline", state: "pause"},
     }
+    this._onPrevButton = this._onPrevButton.bind(this);
+    this._onPlayButton = this._onPlayButton.bind(this);
+    this._onNextButton = this._onNextButton.bind(this);
   }
 
+  _onNextButton(){
+    ReactNativeAudioStreaming.play(this.state.actualAudio, { showInAndroidNotifications: true});
+  }
+  _onPlayButton(){
+
+    if(this.state.reproductorState.img == "play-circle-outline"){
+      if(this.state.reproductorState.state == "play"){
+        this.setState({
+          reproductorState: {state: "pause"},
+        })
+        ReactNativeAudioStreaming.pause();
+      }else {
+        this.setState({
+          reproductorState: {state: "play"},
+        })
+        ReactNativeAudioStreaming.play();
+      }
+      // ReactNativeAudioStreaming.play(this.state.actualAudio, { showInAndroidNotifications: true});
+
+      this.setState({
+        reproductorState: {img: "pause-circle-outline"},
+      })
+    }else {
+      ReactNativeAudioStreaming.pause();
+      this.setState({
+        reproductorState: {img: "play-circle-outline"}
+      })
+    }
+
+  }
+  _onPrevButton(){
+
+  }
   render(){return(
     <View style={styles.container}>
+      <View style={{ position:'absolute', right: 9999}}>
+      </View>
       <View style={styles.backgroundVideo}>
-
+        <Image
+         style={{width: 450, height: 450}}
+         source={{uri: "http://i1.ytimg.com/vi/eEmWrpF8lNA/maxresdefault.jpg"}}
+       />
       </View>
       <View style={styles.playerContainer}>
-        <MaterialIcons size={40} name="skip-previous" color="white"/>
-        <MaterialIcons size={40} name={this.state.reproductorState} color="white"/>
-        <MaterialIcons size={40} name="skip-next" color="white"/>
+        <TouchableHighlight onPress={this._onPrevButton}><MaterialIcons size={40} name="skip-previous" color="white"/></TouchableHighlight>
+        <TouchableHighlight onPress={this._onPlayButton}><MaterialIcons size={40} name={this.state.reproductorState.state} color="white"/></TouchableHighlight>
+        <TouchableHighlight onPress={this._onNextButton}><MaterialIcons size={40} name="skip-next" color="white"/></TouchableHighlight>
       </View>
     </View>
   )}
