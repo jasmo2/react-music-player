@@ -148,13 +148,18 @@ class Reproductor extends Component{
       </View>
       <View style={styles.backgroundVideo}>
         <Image
-         style={{width: 450, height: 450}}
+         style={styles.backgroundImage}
          source={{uri: "http://i1.ytimg.com/vi/eEmWrpF8lNA/maxresdefault.jpg"}}
-       />
+        >
+          <View style={styles.textImagePre}></View>
+          <Text style={styles.textImage}>
+            <MaterialIcons size={40} name="music-note" color="white"/>{this.state.actualAudio.name}<MaterialIcons size={40} name="music-note" color="white"/>
+          </Text>
+        </Image>
       </View>
       <View style={styles.playerContainer}>
         <TouchableHighlight onPress={this._onPrevButton}><MaterialIcons size={40} name="skip-previous" color="white"/></TouchableHighlight>
-        <TouchableHighlight onPress={this._onPlayButton}><MaterialIcons size={40} name={this.state.reproductorState.state} color="white"/></TouchableHighlight>
+        <TouchableHighlight onPress={this._onPlayButton}><MaterialIcons size={40} name={this.state.reproductorState.img} color="white"/></TouchableHighlight>
         <TouchableHighlight onPress={this._onNextButton}><MaterialIcons size={40} name="skip-next" color="white"/></TouchableHighlight>
       </View>
     </View>
