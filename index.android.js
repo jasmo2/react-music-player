@@ -93,29 +93,19 @@ class Reproductor extends Component{
   _onNextButton(){
     ReactNativeAudioStreaming.play(this.state.actualAudio, { showInAndroidNotifications: true});
   }
+
   _onPlayButton(){
-
     if(this.state.reproductorState.img == "play-circle-outline"){
-      if(this.state.reproductorState.state == "play"){
-        this.setState({
-          reproductorState: {state: "pause"},
-        })
-        ReactNativeAudioStreaming.pause();
-      }else {
-        this.setState({
-          reproductorState: {state: "play"},
-        })
-        ReactNativeAudioStreaming.play();
-      }
-      // ReactNativeAudioStreaming.play(this.state.actualAudio, { showInAndroidNotifications: true});
-
+      ReactNativeAudioStreaming.resume();
+      ReactNativeAudioStreaming.pause();
+      console.log(`actualAudio: ${this.state.actualAudio.name}`);
       this.setState({
-        reproductorState: {img: "pause-circle-outline"},
+        reproductorState: {img: "pause-circle-outline", state: "pause"},
       })
     }else {
       ReactNativeAudioStreaming.pause();
       this.setState({
-        reproductorState: {img: "play-circle-outline"}
+        reproductorState: {img: "play-circle-outline", state: "play"}
       })
     }
 
