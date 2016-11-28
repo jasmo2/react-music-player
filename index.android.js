@@ -64,7 +64,19 @@ const audiosPlaylist = [
   {name: "La vamos a Tumbar",song:"https://firebasestorage.googleapis.com/v0/b/audio-8bd52.appspot.com/o/la%20vamos%20a%20tumbar.mp3?alt=media&token=5d1ec1da-78cc-4640-b644-bc6e809f2114"},
   {name: "Hello",song:"https://firebasestorage.googleapis.com/v0/b/audio-8bd52.appspot.com/o/hello.mp3?alt=media&token=19a12a17-fef8-4bd7-a479-f3edf4630cf8"},
 ];
-
+const audiosPlaylistLength = audiosPlaylist.length;
+function findSong(audiosPlaylist, actualAudio) {
+    let index = -1;
+    let count = 0;
+    while (audiosPlaylistLength > count) {
+      if (audiosPlaylist[count].song == actualAudio.song) {
+        index = count + 1;
+      }
+      count +=1 ;
+    }
+    if(index >= audiosPlaylistLength || index < 0){index=-1;}
+    return index;
+}
 class Reproductor extends Component{
   constructor(props){
     super(props);
