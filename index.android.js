@@ -9,9 +9,14 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const styles = StyleSheet.create({
   backgroundVideo: {
     alignItems: "center",
-    backgroundColor: "red",
     flex: 2,
     justifyContent: "center",
+  },
+  backgroundImage:{
+    alignItems: "center",
+    height: 450,
+    justifyContent: "flex-start",
+    width: 450,
   },
   container:{
 		flex: 1,
@@ -40,7 +45,17 @@ const styles = StyleSheet.create({
 	},
 	spaceContainer:{
 		flex: 2
-	}
+	},
+  textImagePre:{
+    flex: 6,
+    marginBottom: 80,
+  },
+  textImage:{
+    color: "white",
+    flex: 2,
+    fontSize: 30,
+    textDecorationLine: "underline",
+  }
 });
 const audioRoot = ""
 const audiosPlaylist = [
