@@ -91,7 +91,22 @@ class Reproductor extends Component{
   }
 
   _onNextButton(){
-    ReactNativeAudioStreaming.play(this.state.actualAudio, { showInAndroidNotifications: true});
+    console.log("next");
+    ReactNativeAudioStreaming.stop();
+    let indexSong = findSong(audiosPlaylist, this.state.actualAudio);
+    let actualSong = null;
+    if ( indexSong != -1) {
+      actualSong = audiosPlaylist[indexSong];
+    }else {
+      actualSong = audiosPlaylist[0];
+    }
+    this.setState({
+      actualAudio: actualSong,
+      reproductorState: {img: "pause-circle-outline", state: "play"},
+
+    });
+    console.log(actualSong.name);
+    ReactNativeAudioStreaming.play(actualSong.song, { showInAndroidNotifications: true});
   }
 
   _onPlayButton(){
@@ -111,7 +126,21 @@ class Reproductor extends Component{
 
   }
   _onPrevButton(){
-
+    console.log("prev");
+    ReactNativeAudioStreaming.stop();
+    let indexSong = findSong(audiosPlaylist, this.state.actualAudio);
+    let actualSong = null;
+    if ( indexSong != -1 ) {
+      actualSong = audiosPlaylist[indexSong];
+    }else {
+      actualSong = audiosPlaylist[audiosPlaylistLength-1];
+    }
+    this.setState({
+      actualAudio: actualSong,
+      reproductorState: {img: "pause-circle-outline", state: "play"},
+    });
+    console.log(actualSong.name);
+    ReactNativeAudioStreaming.play(actualSong.song, { showInAndroidNotifications: true});
   }
   render(){return(
     <View style={styles.container}>
