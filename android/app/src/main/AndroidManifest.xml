@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.musicplayer"
+    package="com.musicplayer.ananai"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -7,9 +7,13 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="22" />
-
+        android:minSdkVersion="15"
+        android:targetSdkVersion="23" />
+    <supports-screens android:smallScreens="true"
+                      android:normalScreens="true"
+                      android:largeScreens="false"
+                      android:xlargeScreens="false"
+    />
     <application
       android:name=".MainApplication"
       android:allowBackup="true"

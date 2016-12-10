@@ -1,4 +1,4 @@
-package com.musicplayer;
+package com.musicplayer.ananai;
 
 import com.facebook.react.ReactActivity;
 
